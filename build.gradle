@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id("org.jetbrains.kotlin.jvm") version '1.5.10'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation group: "org.seleniumhq.selenium", name: "selenium-java", version: "3.141.59"
+    implementation group: "io.github.bonigarcia", name: "webdrivermanager", version: '5.2.2'
+    implementation group: "org.slf4j", name: "slf4j-log4j12", version: '1.7.36'
+    implementation group: "commons-io", name: "commons-io", version: '2.11.0'
+    implementation group: "org.apache.poi", name: "poi-ooxml", version: '5.2.2'
+    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
+    implementation group: "com.googlecode.json-simple", name: "json-simple", version: "1.1.1"
+    implementation group: 'com.microsoft.edge', name: 'msedge-selenium-tools-java', version: '3.141.1'
+    implementation group: 'com.aventstack', name: 'extentreports', version: '5.0.9'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.18.0', ext: 'pom'
+}
+
+test {
+    useJUnitPlatform()
+}
