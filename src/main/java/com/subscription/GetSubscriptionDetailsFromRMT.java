@@ -112,7 +112,7 @@ public class GetSubscriptionDetailsFromRMT {
             }
         }
 
-        FileOutputStream file = new FileOutputStream("./reports/User_Subscription.xlsx");
+        FileOutputStream file = new FileOutputStream(new File("./reports/User_Subscription.xlsx"));
         workbook.write(file);
         file.close();
         System.out.println("Data Copied to Excel");
