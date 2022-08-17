@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GetSubscriptionDetailsFromRMT {
     static WebDriver driver;
-    static String File = "./record.txt";
+    static String File = "./reports/record.txt";
     public static void main(String args[]) throws InterruptedException, IOException {
 //        HashMap<String, String> map = new HashMap<>();
         Map<String, List<String>> map = new HashMap<String, List<String>>();
