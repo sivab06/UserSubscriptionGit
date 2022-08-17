@@ -123,9 +123,13 @@ public class GetSubscriptionDetailsFromRMT {
         driver.quit();
 
     }
-    public static String readFile(String strFile) {
+    public static String readFile(String strFile) throws IOException {
         String strBuffer;
-        try (BufferedReader buffRead = new BufferedReader(new FileReader(strFile))) {
+        File recordFile = new File(strFile);
+        if(!recordFile.exists()){
+            recordFile.createNewFile();
+        }
+        try (BufferedReader buffRead = new BufferedReader(new FileReader(recordFile))) {
             while ((strBuffer = buffRead.readLine()) != null) {
                 return strBuffer.trim();
             }
