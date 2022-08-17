@@ -31,5 +31,5 @@ test {
 }
 
 application {
-    mainClass  = 'com.subscription.JenkinsTest'
+    mainClass  = 'com.subscription.UserSubscriptionCore'
 }
