@@ -1,3 +1,6 @@
+package com.subscription;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -7,10 +10,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class GetSubscriptionDetailsFromRMT {
     static WebDriver driver;
@@ -20,9 +25,11 @@ public class GetSubscriptionDetailsFromRMT {
         Map<String, List<String>> map = new HashMap<String, List<String>>();
         List<String> values = new ArrayList<String>();
 
-        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofMinutes(1));
         driver.get("http://192.168.1.15:96/");
         WebElement User_SubscriptionTab = driver.findElement(By.xpath("//*[@id=\"mat-tab-label-0-4\"]"));
         User_SubscriptionTab.click();
@@ -105,7 +112,7 @@ public class GetSubscriptionDetailsFromRMT {
             }
         }
 
-        FileOutputStream file = new FileOutputStream("E:\\User_Subscription.xlsx");
+        FileOutputStream file = new FileOutputStream("./reports/User_Subscription.xlsx");
         workbook.write(file);
         file.close();
         System.out.println("Data Copied to Excel");

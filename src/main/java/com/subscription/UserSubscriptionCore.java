@@ -1,3 +1,5 @@
+package com.subscription;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -30,9 +32,11 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLHandshakeException;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -72,9 +76,9 @@ public class UserSubscriptionCore {
     static int unabeToAccessTextbox = 0, textboxFoundAndCanAbleToAccess = 0, activiationLinkCount = 0, captchaCount =0, additionalInfo = 0, alreadySubscribedCount = 0, invalidUrlCount =0;
 
     static void readExcel() throws IOException, InterruptedException {
-//		RMT.main();
+        GetSubscriptionDetailsFromRMT.main(null);
 //		String path = "C:\\Users\\TGL239\\Downloads\\Book 6.xlsx";
-        String path = "E:\\User_Subscription.xlsx";
+        String path = "./reports/User_Subscription.xlsx";
 
 //		String path = "C:\\Users\\tgl267\\Downloads\\UserSubcription_Latest3.xlsx";
         int excelRowCount = 1;
@@ -193,7 +197,7 @@ public class UserSubscriptionCore {
 
     public static void main(String[] args) throws Exception {
         Long currentTimeInMillis = System.currentTimeMillis();
-        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
         String emailTxtBoxSecondTry = "//input[contains(@id,'email') or contains(@id,'Email')]";
         String emailTxtBox = "//input[@type='email' or contains(@value,'Email') or contains(@value,'email') or contains(@placeholder,'email') or contains(@placeholder,'Email') or contains(@placeholder,'Email') or contains(@placeholder,'your email')]";
         String subscriptionMsg = "//*[contains(text(),'Thank you for your subscription.') or contains(text(),'Thank you for subscri') or contains(text(),'Thank you for subscrib') or contains(text(),'Thank you') or contains(text(),'for subscribing') or contains(text(),'successfully') or contains(text(),'welcome email') or contains(text(),'signed up') or contains(text(),'signing up') or contains(text(),'have been subscribed') or contains(text(),'for confirming your email address') or contains(text(),'Thanks for subscri') or contains(text(),'THANKS FOR SUBSCRI') or contains(text(),'THANKS FOR SIGN') or contains(text(),'Check your inbox') or contains(text(),'Check Your Inbox') or contains(text(),'re signed up')]";
@@ -201,8 +205,8 @@ public class UserSubscriptionCore {
         String agreeCheckBox = "//*[contains(text(),'I agree') or contains(text(),'i agree') or contains(text(),'Yes, I agree')]";
         String alreadySubscribedMsg = "//*[contains(text(),'This email address is already subscribed.') or contains(text(),'This email address is already') or contains(text(),'already subscribed') or contains(text(),'This email address is already subscribed')]";
         String captchaCheck = "//*[contains(text(),'robot') or contains(text(),'Recaptcha')]//*[not(@style)]";
-        String path = "./out.txt";
-        String finalMsgPath = "./FinalMsg.txt";
+        String path = "./reports/out.txt";
+        String finalMsgPath = "./reports/FinalMsg.txt";
         String submitBtn = emailTxtBox+"//parent::*//input[@type='submit' or contains(@id,'submit')] | "+emailTxtBox+"//following-sibling::*[@type='submit']";
         String additionalDetailsInfo = "//label[contains(text(),'First Name') or contains(text(),'FirstName')] | //*[contains(text(),'is required')]";
         String activiationLinkInfo = "//*[contains(text(),'activation link')]";
@@ -218,10 +222,11 @@ public class UserSubscriptionCore {
 //    	System.setProperty("webdriver.chrome.driver","C:\\MyPlace\\Softwares\\chromedriver_103\\chromedriver.exe");
 //    	System.setProperty("webdriver.edge.driver","C:\\MyPlace\\Softwares\\EdgeDriver\\edgedriver_win64\\msedgedriver.exe");
 
-
+        WebDriverManager.chromedriver().setup();
         driver=new ChromeDriver();
 //    	driver=new EdgeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofMinutes(1));
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         shortWait = new WebDriverWait(driver, Duration.ofSeconds(4));
         mediumWait = new WebDriverWait(driver, Duration.ofSeconds(6));
