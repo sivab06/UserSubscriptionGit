@@ -50,7 +50,7 @@ public class GetSubscriptionDetailsFromRMT {
 
 
             driver.findElement(By.xpath("//mat-option[contains(@id,'mat-option')]["+j+"]/span")).click();
-            String userID = driver.findElement(By.xpath("//*[@id=\"mat-select-0\"]/div/div[1]/span/span")).getText();
+            String userID = driver.findElement(By.xpath("//*[@id=\"mat-select-0\"]/div/div[1]/span/span")).getText().trim();
 //            System.out.println(userID);
             String last = readFile(File);
 //            System.out.println("Record--->"+last);
@@ -127,7 +127,7 @@ public class GetSubscriptionDetailsFromRMT {
         String strBuffer;
         try (BufferedReader buffRead = new BufferedReader(new FileReader(strFile))) {
             while ((strBuffer = buffRead.readLine()) != null) {
-                return strBuffer;
+                return strBuffer.trim();
             }
 
         } catch (IOException e) {
