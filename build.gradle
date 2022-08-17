@@ -1,7 +1,7 @@
 plugins {
-    id "application"
+    id 'application'
 }
-apply plugin : "java"
+apply plugin : 'java'
 
 group 'org.example'
 version '1.0-SNAPSHOT'
@@ -26,10 +26,10 @@ dependencies {
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.18.0', ext: 'pom'
 }
 
-ext {
-    javaMainClass = "src.test.java.JenkinsTest"
+test {
+    useJUnitPlatform()
 }
 
 application {
-    mainClassName = javaMainClass
+    mainClass  = 'com.subscription.JenkinsTest'
 }
