@@ -111,7 +111,10 @@ public class GetSubscriptionDetailsFromRMT {
                 row.createCell(1).setCellValue(entry.getValue().get(i));
             }
         }
-
+        File filePath = new File("./reports/User_Subscription.xlsx");
+        if(!filePath.exists()){
+            filePath.createNewFile();
+        }
         FileOutputStream file = new FileOutputStream(new File("./reports/User_Subscription.xlsx"));
         workbook.write(file);
         file.close();
